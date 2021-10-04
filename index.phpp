@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/datatable/datatables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+    <link rel="stylesheet" href="/assets/gallery-clean.css">
+    <title>Art gallery</title>
+</head>
+
+<body>
+    <div class="container gallery-container">
+        <nav class="navbar navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
+            <a class="navbar-brand font-italic" href="/tubes">Arts Collection</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <form class="d-flex ml-auto">
+                    <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search" width="70%">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <ul class="navbar-nav ml-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Login</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="tz-gallery mt-2 my-2 justify-content-center">
+            <div class="row ">
+                <?php
+                include "conn.php"; //kita nulonuwon sama database dan server
+                $SQL = "SELECT * FROM gallery"; //sintak sql
+                $result = mysqli_query($koneksi, $SQL); //menjalankan sql
+                foreach ($result as $row) {
+                ?>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            <a class="lightbox" href="assets/images/<?php echo $row['gallery_image'] ?>">
+                                <img src="assets/images/<?php echo $row['gallery_image'] ?>" width="300px" alt="Park">
+                            </a>
+                            <div class="caption">
+                                <h3>Thumbnail label</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">© 2020-2021 <span class="font-italic">Art Collection</span></p>
+        </footer>
+    </div>
+    <script src="assets/datatable/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/datatable/datatables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+    <script>
+        baguetteBox.run('.tz-gallery');
+    </script>
+</body>
+
+</html>
